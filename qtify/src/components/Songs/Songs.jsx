@@ -12,18 +12,22 @@ function Songs() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const [songsRes, genresRes] = await Promise.all([
-        axios.get(`${BASE_URL}/songs`),
-        axios.get(`${BASE_URL}/genres`),
-      ]);
-      setSongs(songsRes.data);
-      setGenres(genresRes.data);
+      try {
+        const [songsRes, genresRes] = await Promise.all([
+          axios.get(`${BASE_URL}/songs`),
+          axios.get(`${BASE_URL}/genres`),
+        ]);
+
+        setSongs(songsRes.data); // plain array
+        setGenres(genresRes.data.data); // { data: [...] }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
     fetchData();
   }, []);
 
-  const allTab = { key: "all", label: "All" };
-  const tabs = [allTab, ...genres];
+  const tabs = [{ key: "all", label: "All" }, ...genres];
 
   const filteredSongs =
     selectedTab === 0
@@ -41,9 +45,9 @@ function Songs() {
       <Tabs
         value={selectedTab}
         onChange={(e, newVal) => setSelectedTab(newVal)}
-        classes={{ root: styles.tabs, indicator: styles.indicator }}
+        classes={{ root: styles.tabs }}
       >
-        {tabs.map((tab, index) => (
+        {tabs.map((tab) => (
           <Tab
             key={tab.key}
             label={tab.label}
