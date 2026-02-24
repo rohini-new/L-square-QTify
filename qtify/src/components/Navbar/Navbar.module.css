@@ -2,8 +2,8 @@
   background-color: var(--color-primary);
   height: 74px;
   width: 100%;
-  padding: 0px 16px; /* ← CHANGE 32px → 16px */
+  padding-left: 16px; /* EXACT */
+  padding-right: 16px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }

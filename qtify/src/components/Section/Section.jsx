@@ -6,7 +6,7 @@ import styles from "./Section.module.css";
 
 function Section({ title, endpoint }) {
   const [data, setData] = useState([]);
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,7 +24,7 @@ function Section({ title, endpoint }) {
           onClick={() => setCollapsed(!collapsed)}
           className={styles.toggle}
         >
-          {collapsed ? "Show all" : "Collapse"}
+          {collapsed ? "Collapse" : "Show all"}
         </button>
       </div>
 
