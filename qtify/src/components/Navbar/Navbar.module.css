@@ -4,7 +4,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start; /* Remove flex centering so marginTop controls it */
+  align-items: flex-start;
   padding: 0;
   margin: 0;
 }
