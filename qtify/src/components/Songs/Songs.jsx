@@ -1,33 +1,65 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Tabs, Tab } from "@mui/material";
 import BASE_URL from "../../config";
+import Card from "../Card/Card";
 import styles from "./Songs.module.css";
 
 function Songs() {
   const [songs, setSongs] = useState([]);
+  const [genres, setGenres] = useState([]);
+  const [selectedTab, setSelectedTab] = useState(0);
 
   useEffect(() => {
-    const fetchSongs = async () => {
-      const response = await axios.get(`${BASE_URL}/songs`);
-      setSongs(response.data);
+    const fetchData = async () => {
+      const [songsRes, genresRes] = await Promise.all([
+        axios.get(`${BASE_URL}/songs`),
+        axios.get(`${BASE_URL}/genres`),
+      ]);
+      setSongs(songsRes.data);
+      setGenres(genresRes.data);
     };
-
-    fetchSongs();
+    fetchData();
   }, []);
+
+  const allTab = { key: "all", label: "All" };
+  const tabs = [allTab, ...genres];
+
+  const filteredSongs =
+    selectedTab === 0
+      ? songs
+      : songs.filter(
+          (song) => song.genre?.key === genres[selectedTab - 1]?.key,
+        );
 
   return (
     <div className={styles.section}>
-      <h2>Songs</h2>
+      <div className={styles.header}>
+        <h2 className={styles.title}>Songs</h2>
+      </div>
+
+      <Tabs
+        value={selectedTab}
+        onChange={(e, newVal) => setSelectedTab(newVal)}
+        classes={{ root: styles.tabs, indicator: styles.indicator }}
+      >
+        {tabs.map((tab, index) => (
+          <Tab
+            key={tab.key}
+            label={tab.label}
+            classes={{ root: styles.tab, selected: styles.tabSelected }}
+          />
+        ))}
+      </Tabs>
 
       <div className={styles.grid}>
-        {songs.map((song) => (
-          <div key={song.id} className={styles.card}>
-            <img src={song.image} alt={song.title} />
-            <div className={styles.bottom}>
-              <p className={styles.title}>{song.title}</p>
-              <p className={styles.artists}>{song.artists.join(", ")}</p>
-            </div>
-          </div>
+        {filteredSongs.map((song) => (
+          <Card
+            key={song.id}
+            image={song.image}
+            likes={song.likes}
+            title={song.title}
+          />
         ))}
       </div>
     </div>

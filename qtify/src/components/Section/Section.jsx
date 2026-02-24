@@ -4,7 +4,7 @@ import BASE_URL from "../../config";
 import Card from "../Card/Card";
 import styles from "./Section.module.css";
 
-function Section({ title, endpoint }) {
+function Section({ title, endpoint, showToggle = true, cardType = "album" }) {
   const [data, setData] = useState([]);
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -24,12 +24,14 @@ function Section({ title, endpoint }) {
     <div className={styles.section}>
       <div className={styles.header}>
         <h2 className={styles.title}>{title}</h2>
-        <button
-          className={styles.toggle}
-          onClick={() => setIsExpanded(!isExpanded)}
-        >
-          {isExpanded ? "Collapse" : "Show all"}
-        </button>
+        {showToggle && (
+          <button
+            className={styles.toggle}
+            onClick={() => setIsExpanded(!isExpanded)}
+          >
+            {isExpanded ? "Collapse" : "Show all"}
+          </button>
+        )}
       </div>
 
       <div className={styles.grid}>
@@ -37,7 +39,8 @@ function Section({ title, endpoint }) {
           <Card
             key={item.id}
             image={item.image}
-            follows={item.follows}
+            follows={cardType === "album" ? item.follows : undefined}
+            likes={cardType === "song" ? item.likes : undefined}
             title={item.title}
           />
         ))}
