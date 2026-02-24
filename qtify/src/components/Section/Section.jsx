@@ -4,9 +4,9 @@ import BASE_URL from "../../config";
 import Card from "../Card/Card";
 import styles from "./Section.module.css";
 
-function Section({ title, endpoint, defaultCollapsed = false }) {
+function Section({ title, endpoint }) {
   const [data, setData] = useState([]);
-  const [collapsed, setCollapsed] = useState(defaultCollapsed);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,11 +17,8 @@ function Section({ title, endpoint, defaultCollapsed = false }) {
         console.error("Error fetching data:", error);
       }
     };
-
     fetchData();
   }, [endpoint]);
-
-  const visibleData = collapsed ? data.slice(0, 7) : data;
 
   return (
     <div className={styles.section}>
@@ -29,14 +26,14 @@ function Section({ title, endpoint, defaultCollapsed = false }) {
         <h2 className={styles.title}>{title}</h2>
         <button
           className={styles.toggle}
-          onClick={() => setCollapsed(!collapsed)}
+          onClick={() => setIsExpanded(!isExpanded)}
         >
-          {collapsed ? "Show all" : "Collapse"}
+          {isExpanded ? "Collapse" : "Show all"}
         </button>
       </div>
 
       <div className={styles.grid}>
-        {visibleData.map((item) => (
+        {data.map((item) => (
           <Card
             key={item.id}
             image={item.image}
