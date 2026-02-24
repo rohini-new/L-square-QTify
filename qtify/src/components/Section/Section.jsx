@@ -23,14 +23,15 @@ function Section({ title, endpoint, defaultCollapsed = false }) {
 
         <button
           className={styles.toggle}
-          onClick={() => setCollapsed((prev) => !prev)}
+          onClick={() => setCollapsed(!collapsed)}
         >
           {collapsed ? "Show all" : "Collapse"}
         </button>
       </div>
 
+      {/* ALWAYS render full data */}
       <div className={styles.grid}>
-        {(collapsed ? data.slice(0, 7) : data).map((item) => (
+        {data.map((item) => (
           <Card
             key={item.id}
             image={item.image}
