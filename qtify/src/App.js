@@ -10,8 +10,17 @@ function App() {
     <>
       <Navbar searchData={[]} />
       <Hero />
-      <Section title="Top Albums" endpoint="/albums/top" />
-      <Section title="New Albums" endpoint="/albums/new" />
+      <Section
+        title="Top Albums"
+        endpoint="/albums/top"
+        defaultCollapsed={false}
+      />
+
+      <Section
+        title="New Albums"
+        endpoint="/albums/new"
+        defaultCollapsed={true}
+      />
       <Songs />
     </>
   );

@@ -4,9 +4,9 @@ import BASE_URL from "../../config";
 import Card from "../Card/Card";
 import styles from "./Section.module.css";
 
-function Section({ title, endpoint }) {
+function Section({ title, endpoint, defaultCollapsed }) {
   const [data, setData] = useState([]);
-  const [collapsed, setCollapsed] = useState(title === "New Albums");
+  const [collapsed, setCollapsed] = useState(defaultCollapsed);
 
   useEffect(() => {
     const fetchData = async () => {
