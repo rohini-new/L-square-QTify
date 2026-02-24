@@ -1,0 +1,9 @@
+.logo {
+  height: 40px; /* Matches Figma proportion */
+  width: auto;
+
+  display: block;
+
+  margin: 0 !important;
+  padding: 0 !important;
+}

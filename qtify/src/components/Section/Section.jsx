@@ -6,7 +6,7 @@ import styles from "./Section.module.css";
 
 function Section({ title, endpoint, defaultCollapsed }) {
   const [data, setData] = useState([]);
-  const [collapsed, setCollapsed] = useState(defaultCollapsed);
+  const [collapsed, setCollapsed] = useState(defaultCollapsed ?? false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +29,18 @@ function Section({ title, endpoint, defaultCollapsed }) {
         </button>
       </div>
 
-      {!collapsed && (
+      {collapsed ? (
+        <div className={styles.slider}>
+          {data.map((item) => (
+            <Card
+              key={item.id}
+              image={item.image}
+              follows={item.follows}
+              title={item.title}
+            />
+          ))}
+        </div>
+      ) : (
         <div className={styles.grid}>
           {data.map((item) => (
             <Card
