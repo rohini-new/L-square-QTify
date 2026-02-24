@@ -3,7 +3,11 @@ import styles from "./Logo.module.css";
 import logo from "../../assets/logo.png";
 
 function Logo() {
-  return <img src={logo} alt="Qtify logo" className={styles.logo} />;
+  return (
+    <div className={styles.logoContainer}>
+      <img src={logo} alt="Qtify logo" className={styles.logo} />
+    </div>
+  );
 }
 
 export default Logo;

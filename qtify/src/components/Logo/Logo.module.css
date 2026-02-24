@@ -1,6 +1,13 @@
+.logoContainer {
+  height: 40px; /* same as logo height */
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  margin-top: 17px; /* centers it within navbar */
+}
+
 .logo {
   height: 40px;
   display: block;
-  margin-top: 17px;
-  margin-left: 0;
+  margin: 0;
 }
