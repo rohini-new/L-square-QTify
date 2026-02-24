@@ -1,0 +1,36 @@
+.section {
+  padding: 32px;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  width: 159px;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #1f1f1f;
+}
+
+.card img {
+  width: 100%;
+  height: 205px;
+  object-fit: cover;
+}
+
+.bottom {
+  padding: 8px;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.artists {
+  font-size: 12px;
+  color: gray;
+}
