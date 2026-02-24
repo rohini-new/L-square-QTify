@@ -4,9 +4,9 @@ import BASE_URL from "../../config";
 import Card from "../Card/Card";
 import styles from "./Section.module.css";
 
-function Section({ title, endpoint, defaultCollapsed }) {
+function Section({ title, endpoint, defaultCollapsed = false }) {
   const [data, setData] = useState([]);
-  const [collapsed, setCollapsed] = useState(defaultCollapsed ?? false);
+  const [collapsed, setCollapsed] = useState(defaultCollapsed);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,36 +22,23 @@ function Section({ title, endpoint, defaultCollapsed }) {
         <h2>{title}</h2>
 
         <button
-          onClick={() => setCollapsed(!collapsed)}
           className={styles.toggle}
+          onClick={() => setCollapsed((prev) => !prev)}
         >
           {collapsed ? "Show all" : "Collapse"}
         </button>
       </div>
 
-      {collapsed ? (
-        <div className={styles.slider}>
-          {data.map((item) => (
-            <Card
-              key={item.id}
-              image={item.image}
-              follows={item.follows}
-              title={item.title}
-            />
-          ))}
-        </div>
-      ) : (
-        <div className={styles.grid}>
-          {data.map((item) => (
-            <Card
-              key={item.id}
-              image={item.image}
-              follows={item.follows}
-              title={item.title}
-            />
-          ))}
-        </div>
-      )}
+      <div className={styles.grid}>
+        {(collapsed ? data.slice(0, 7) : data).map((item) => (
+          <Card
+            key={item.id}
+            image={item.image}
+            follows={item.follows}
+            title={item.title}
+          />
+        ))}
+      </div>
     </div>
   );
 }
