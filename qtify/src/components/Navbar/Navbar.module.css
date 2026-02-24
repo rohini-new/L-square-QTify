@@ -7,6 +7,5 @@
   align-items: center;
   justify-content: space-between;
 
-  padding-left: 0; /* REMOVE 16px */
-  padding-right: 16px;
+  padding: 0; /* REMOVE ALL PADDING */
 }
