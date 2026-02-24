@@ -10,17 +10,23 @@ function Section({ title, endpoint, defaultCollapsed = false }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`${BASE_URL}${endpoint}`);
-      setData(response.data);
+      try {
+        const response = await axios.get(`${BASE_URL}${endpoint}`);
+        setData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
+
     fetchData();
   }, [endpoint]);
+
+  const visibleData = collapsed ? data.slice(0, 7) : data;
 
   return (
     <div className={styles.section}>
       <div className={styles.header}>
-        <h2>{title}</h2>
-
+        <h2 className={styles.title}>{title}</h2>
         <button
           className={styles.toggle}
           onClick={() => setCollapsed(!collapsed)}
@@ -29,9 +35,8 @@ function Section({ title, endpoint, defaultCollapsed = false }) {
         </button>
       </div>
 
-      {/* ALWAYS render full data */}
       <div className={styles.grid}>
-        {data.map((item) => (
+        {visibleData.map((item) => (
           <Card
             key={item.id}
             image={item.image}

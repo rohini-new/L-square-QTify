@@ -1,18 +1,24 @@
 .section {
-  padding: 32px;
+  margin-top: 40px;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 24px; /* vertical spacing before grid */
+}
+
+.title {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
 }
 
 .toggle {
   background: none;
   border: none;
-  color: var(--color-primary);
+  color: #34c94b; /* Figma green */
   font-weight: 600;
   cursor: pointer;
 }
@@ -20,5 +26,5 @@
 .grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 20px; /* clean spacing between cards */
 }

@@ -1,7 +1,5 @@
 .logo {
   height: 40px;
   display: block;
-
-  /* compensate internal PNG whitespace */
-  margin-left: -18px;
+  margin-left: 20px;
 }
