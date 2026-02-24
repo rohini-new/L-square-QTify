@@ -2,8 +2,13 @@
   background-color: var(--color-primary);
   height: 74px;
   width: 100%;
-  padding: 0 16px; /* MUST be 16px */
+  padding-left: 16px !important;
+  padding-right: 16px !important;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.navbar img {
+  display: block;
 }

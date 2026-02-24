@@ -6,9 +6,7 @@ import styles from "./Section.module.css";
 
 function Section({ title, endpoint }) {
   const [data, setData] = useState([]);
-  const [collapsed, setCollapsed] = useState(
-    title === "New Albums" ? true : false,
-  );
+  const [collapsed, setCollapsed] = useState(title === "New Albums");
 
   useEffect(() => {
     const fetchData = async () => {
