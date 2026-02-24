@@ -6,7 +6,9 @@ import styles from "./Section.module.css";
 
 function Section({ title, endpoint }) {
   const [data, setData] = useState([]);
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed, setCollapsed] = useState(
+    title === "New Albums" ? true : false,
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,11 +22,12 @@ function Section({ title, endpoint }) {
     <div className={styles.section}>
       <div className={styles.header}>
         <h2>{title}</h2>
+
         <button
           onClick={() => setCollapsed(!collapsed)}
           className={styles.toggle}
         >
-          {collapsed ? "Collapse" : "Show all"}
+          {collapsed ? "Show all" : "Collapse"}
         </button>
       </div>
 
